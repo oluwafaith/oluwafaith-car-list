@@ -14,7 +14,7 @@ import {GraphQLObjectType,
      GraphQLNonNull
     } from 'graphql'
 
-//dummy data
+
 
 const PurchaseType = new GraphQLObjectType({
     name:'PurchasedCars',
@@ -28,7 +28,6 @@ const PurchaseType = new GraphQLObjectType({
         allcar:{
             type: AllType,
             resolve(parent, args){
-               // return _.filter(books,{authorId: parent.id})
                return AllCars.findById(parent.allcarId)
             }
         }
@@ -42,14 +41,13 @@ fields: ()=>({
     name:{type: GraphQLString},
     type:{type: GraphQLString},
     productionDate:{type: GraphQLString},
-    color:{type:   GraphQLList(GraphQLString) },
+    color:{type: GraphQLList(GraphQLString) },
     amount:{type: graphql.GraphQLInt},
     condition:{type: GraphQLString},
     price:{type:graphql.GraphQLInt},
     purchasedcars:{
         type:new GraphQLList(PurchaseType),
     resolve(parent, args){
-       // return _.find(authors, {id:parent.authorId})
        return AllCars.find({allcarId:parent.id})
     }
 }
@@ -67,7 +65,6 @@ fields: ()=>({
     staffs:{
         type:AllType,
     resolve(parent, args){
-       // return _.find(authors, {id:parent.authorId})
        return Staffs.findById(parent.allcarId)
     }
 }
@@ -84,16 +81,21 @@ const RootQuery = new GraphQLObjectType({
             type:PurchaseType,
             args:{id:{type:GraphQLID}},
             resolve(parent, args){
-                //return _.find(authors, {id:args.id})
                 return PurchasedCars.findById(args.id)
             }
         },
+        // purchasedcarbyType:{
+        //     type:PurchaseType,
+        //     args:{id:{type:GraphQLID}},
+        //     resolve(parent, args){
+        //         return PurchasedCars.findById(args.id)
+        //     }
+        // },
 
         allcar:{
             type:AllType,
             args:{id:{type:GraphQLID}},
             resolve(parent, args){
-            // return   _.find(books, {id:args.id}) 
             return AllCars.findById(args.id)
             }
         },
@@ -101,7 +103,6 @@ const RootQuery = new GraphQLObjectType({
             type:StaffType,
             args:{id:{type:GraphQLID}},
             resolve(parent, args){
-                //return _.find(authors, {id:args.id})
                 return Staffs.findById(args.id)
             }
         },
@@ -114,7 +115,6 @@ const RootQuery = new GraphQLObjectType({
         purchasedcars:{
             type: new GraphQLList(PurchaseType),
             resolve(parent, args){
-             //   return authors
              return PurchasedCars.find({})
             }
         },
@@ -122,7 +122,6 @@ const RootQuery = new GraphQLObjectType({
         allcars:{
             type: new GraphQLList(AllType),
             resolve(parent, args){
-               // return books
                return AllCars.find({})
             }
         },
@@ -131,7 +130,6 @@ const RootQuery = new GraphQLObjectType({
          staffs:{
             type: new GraphQLList(StaffType),
             resolve(parent, args){
-             //   return authors
              return Staffs.find({})
             }
         },
@@ -269,7 +267,7 @@ const Mutation = new GraphQLObjectType({
                 name:{type:GraphQLString},
                 type:{type:GraphQLString},
                 productionDate:{type:GraphQLString},
-                color:{type:GraphQLString},
+                color:{type:GraphQLList( GraphQLString)},
                 amount:{type: GraphQLInt},
                 condition: {type: GraphQLString},
                 price: {type: GraphQLInt }

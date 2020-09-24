@@ -21,14 +21,24 @@ import user from '../schema/user';
             company:{
                 type:OrganizationType,
                 args:{id:{type:GraphQLID}},
-                resolve(parent, args){
+               async resolve(parent, args, context){
+                    const value = await context
+                    if(!value.headers.authorization){
+                        throw Error('invalid user')
+                    }
+                    
                     return Company.findById(args.id)
                 }
             },
             //GET ALL COMPANIES
             companies:{
                 type: new GraphQLList(OrganizationType),
-                resolve(parent, args){
+                async resolve(parent, args, context){
+                    const value = await context
+                    if(!value.headers.authorization){
+                        throw Error('invalid user')
+                    }
+                    // console.log(context.headers);
                     return Company.find({})
                 }
             },

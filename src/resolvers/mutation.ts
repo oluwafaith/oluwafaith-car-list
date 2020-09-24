@@ -74,15 +74,7 @@ export const Mutation = new GraphQLObjectType({
             },
             resolve(parent, args){
                 return Company.findOneAndUpdate({_id:args.id},{
-                    organization: args.organization,
-                    //createdAt:args.createdAt,
-                    //updatedAt:args.updatedAt,
-                    products:args.products,
-                    marketValue:args.marketValue,
-                    address:args.address,
-                    ceo:args.ceo,
-                    noOfEmployees:args.noOfEmployees,
-                    employees:args.employees
+                    ...args
                 }, {new:true})
             }
         },

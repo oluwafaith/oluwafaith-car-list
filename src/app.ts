@@ -1,4 +1,5 @@
 import createError from "http-errors";
+import { auth } from "./auth";
 //import express from 'express';
 import path from "path";
 import cookieParser from "cookie-parser";
@@ -8,13 +9,14 @@ import mongoose from "mongoose";
 //import companies from '../src/routes/index'
 import {graphqlHTTP} from 'express-graphql'
 import schema from './schema'
-import { verify } from "jsonwebtoken";
-//import auth from "../src/middleware/auth"
 
 //import indexRouter from "./routes/index";
 //import usersRouter from './routes/users';
 
 const app = express();
+app.get('/', (req, res, next)=>{
+  res.send('home  page')
+})
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -29,8 +31,8 @@ app.use(express.static(path.join(__dirname, "public")));
 //app.use("/", indexRouter);
 
 app.use("/graphql", graphqlHTTP(async(req)=>({
+  context: await auth(req),
   schema:schema,
- // context: await auth(req),
   graphiql:true
 })))
 //app.use('/users', usersRouter);

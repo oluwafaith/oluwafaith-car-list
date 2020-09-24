@@ -6,13 +6,25 @@ import mongoose from 'mongoose'
 const app = express()
 
 //mongoose
-mongoose.connect('mongodb://localhost/graphqlQuery',{
-   useNewUrlParser:true,
-   useCreateIndex:true,
-   useFindAndModify: false,
-   useUnifiedTopology:true
-}).then(()=>console.log('connected to the database'))
-.catch(err => console.error('could not connect to database', err)) 
+// mongoose.connect('mongodb://localhost/graphqlQuery',{
+//    useNewUrlParser:true,
+//    useCreateIndex:true,
+//    useFindAndModify: false,
+//    useUnifiedTopology:true
+// }).then(()=>console.log('connected to the database'))
+// .catch(err => console.error('could not connect to database', err)) 
+
+mongoose.connect('mongodb+srv://oluwafaith:oluwafaith@cluster0.d6z6r.mongodb.net/graphQuery',{
+  useNewUrlParser:true,
+  useCreateIndex:true,
+  useFindAndModify: false,
+  useUnifiedTopology:true
+})
+.then(() => {
+console.log("Connected to Database");
+}).catch((err) => {
+    console.log("Not Connected to Database ERROR! ", err);
+});
 
 app.use('/graphql', graphqlHTTP({
 schema:schema,

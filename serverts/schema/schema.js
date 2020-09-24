@@ -9,7 +9,6 @@ var purchasedCars_1 = __importDefault(require("../models/purchasedCars"));
 var staff_1 = __importDefault(require("../models/staff"));
 //const author = require('../models/purchasedCars');
 var graphql_1 = require("graphql");
-//dummy data
 var PurchaseType = new graphql_1.GraphQLObjectType({
     name: 'PurchasedCars',
     fields: function () { return ({
@@ -22,7 +21,6 @@ var PurchaseType = new graphql_1.GraphQLObjectType({
         allcar: {
             type: AllType,
             resolve: function (parent, args) {
-                // return _.filter(books,{authorId: parent.id})
                 return allCars_1.default.findById(parent.allcarId);
             }
         }
@@ -42,7 +40,6 @@ var AllType = new graphql_1.GraphQLObjectType({
         purchasedcars: {
             type: new graphql_1.GraphQLList(PurchaseType),
             resolve: function (parent, args) {
-                // return _.find(authors, {id:parent.authorId})
                 return allCars_1.default.find({ allcarId: parent.id });
             }
         }
@@ -59,7 +56,6 @@ var StaffType = new graphql_1.GraphQLObjectType({
         staffs: {
             type: AllType,
             resolve: function (parent, args) {
-                // return _.find(authors, {id:parent.authorId})
                 return staff_1.default.findById(parent.allcarId);
             }
         }
@@ -72,7 +68,6 @@ var RootQuery = new graphql_1.GraphQLObjectType({
             type: PurchaseType,
             args: { id: { type: graphql_1.GraphQLID } },
             resolve: function (parent, args) {
-                //return _.find(authors, {id:args.id})
                 return purchasedCars_1.default.findById(args.id);
             }
         },
@@ -80,7 +75,6 @@ var RootQuery = new graphql_1.GraphQLObjectType({
             type: AllType,
             args: { id: { type: graphql_1.GraphQLID } },
             resolve: function (parent, args) {
-                // return   _.find(books, {id:args.id}) 
                 return allCars_1.default.findById(args.id);
             }
         },
@@ -88,7 +82,6 @@ var RootQuery = new graphql_1.GraphQLObjectType({
             type: StaffType,
             args: { id: { type: graphql_1.GraphQLID } },
             resolve: function (parent, args) {
-                //return _.find(authors, {id:args.id})
                 return staff_1.default.findById(args.id);
             }
         },
@@ -96,14 +89,12 @@ var RootQuery = new graphql_1.GraphQLObjectType({
         purchasedcars: {
             type: new graphql_1.GraphQLList(PurchaseType),
             resolve: function (parent, args) {
-                //   return authors
                 return purchasedCars_1.default.find({});
             }
         },
         allcars: {
             type: new graphql_1.GraphQLList(AllType),
             resolve: function (parent, args) {
-                // return books
                 return allCars_1.default.find({});
             }
         },
@@ -111,7 +102,6 @@ var RootQuery = new graphql_1.GraphQLObjectType({
         staffs: {
             type: new graphql_1.GraphQLList(StaffType),
             resolve: function (parent, args) {
-                //   return authors
                 return staff_1.default.find({});
             }
         },
@@ -240,7 +230,7 @@ var Mutation = new graphql_1.GraphQLObjectType({
                 name: { type: graphql_1.GraphQLString },
                 type: { type: graphql_1.GraphQLString },
                 productionDate: { type: graphql_1.GraphQLString },
-                color: { type: graphql_1.GraphQLString },
+                color: { type: graphql_1.GraphQLList(graphql_1.GraphQLString) },
                 amount: { type: graphql_1.GraphQLInt },
                 condition: { type: graphql_1.GraphQLString },
                 price: { type: graphql_1.GraphQLInt }

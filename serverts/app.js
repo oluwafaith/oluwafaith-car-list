@@ -9,13 +9,24 @@ var schema_1 = __importDefault(require("./schema/schema"));
 var mongoose_1 = __importDefault(require("mongoose"));
 var app = express_1.default();
 //mongoose
-mongoose_1.default.connect('mongodb://localhost/graphqlQuery', {
+// mongoose.connect('mongodb://localhost/graphqlQuery',{
+//    useNewUrlParser:true,
+//    useCreateIndex:true,
+//    useFindAndModify: false,
+//    useUnifiedTopology:true
+// }).then(()=>console.log('connected to the database'))
+// .catch(err => console.error('could not connect to database', err)) 
+mongoose_1.default.connect('mongodb+srv://oluwafaith:oluwafaith@cluster0.d6z6r.mongodb.net/graphQuery', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true
-}).then(function () { return console.log('connected to the database'); })
-    .catch(function (err) { return console.error('could not connect to database', err); });
+})
+    .then(function () {
+    console.log("Connected to Database");
+}).catch(function (err) {
+    console.log("Not Connected to Database ERROR! ", err);
+});
 app.use('/graphql', express_graphql_1.graphqlHTTP({
     schema: schema_1.default,
     graphiql: true

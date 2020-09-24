@@ -12,15 +12,30 @@ var mongoose = require('mongoose')
 
 
 
-//mongoose
-mongoose.connect('mongodb://localhost/companyGraph',{
-   useNewUrlParser:true,
-   useCreateIndex:true,
-   useFindAndModify: false,
-   useUnifiedTopology:true
-}).then(()=>console.log('connected to the database'))
-.catch(err => console.error('could not connect to database', err)) 
+// //mongoose
+// mongoose.connect('mongodb://localhost/companyGraph',{
+  //  useNewUrlParser:true,
+  //  useCreateIndex:true,
+  //  useFindAndModify: true,
+  //  useUnifiedTopology:true
+// }).then(()=>console.log('connected to the database'))
+// .catch(err => console.error('could not connect to database', err)) 
 
+mongoose.connect('mongodb+srv://oluwafaith:oluwafaith@cluster0.d6z6r.mongodb.net/companyGraph',{
+  useNewUrlParser:true,
+  useCreateIndex:true,
+  useFindAndModify: false,
+  useUnifiedTopology:true
+})
+.then(() => {
+console.log("Connected to Database");
+}).catch((err) => {
+    console.log("Not Connected to Database ERROR! ", err);
+});
+
+// mongoose.connection.once('open', () => {
+//   console.log("Connected to MongoDB");
+// })
 
 //jwt
 // if(!config.get('jwtPrivateKey')){
