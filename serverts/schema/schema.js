@@ -66,11 +66,20 @@ var RootQuery = new graphql_1.GraphQLObjectType({
     fields: {
         purchasedcar: {
             type: PurchaseType,
-            args: { id: { type: graphql_1.GraphQLID } },
+            args: {
+                id: { type: graphql_1.GraphQLID }
+            },
             resolve: function (parent, args) {
                 return purchasedCars_1.default.findById(args.id);
             }
         },
+        // purchasedcarbyType:{
+        //     type:PurchaseType,
+        //     args:{id:{type:GraphQLID}},
+        //     resolve(parent, args){
+        //         return PurchasedCars.findById(args.id)
+        //     }
+        // },
         allcar: {
             type: AllType,
             args: { id: { type: graphql_1.GraphQLID } },

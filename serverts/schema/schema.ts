@@ -79,7 +79,8 @@ const RootQuery = new GraphQLObjectType({
 
         purchasedcar:{
             type:PurchaseType,
-            args:{id:{type:GraphQLID}},
+            args:{
+                id:{type:GraphQLID}},
             resolve(parent, args){
                 return PurchasedCars.findById(args.id)
             }

@@ -24,7 +24,7 @@ describe("Test all routes", () => {
       console.log(`error ${error.toString()}`);
     }
    });
-
+   
   // it("Gets all organizations", async (done) => {
   //   request
   //     .post("/graphql")
@@ -32,7 +32,7 @@ describe("Test all routes", () => {
   //     .set("Accept", "application.json")
   //     .expect("Content-Type", /json/)
   //     .end(function (err:any, res:any) {
-  //         console.log(res.body)
+  //         console.log('res.body')
   //       expect(res.body).toBeInstanceOf(Object);
   //       done();
   //     });
