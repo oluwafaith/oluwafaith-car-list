@@ -21,12 +21,8 @@ var mongoose = require('mongoose')
 // }).then(()=>console.log('connected to the database'))
 // .catch(err => console.error('could not connect to database', err)) 
 
-mongoose.connect('mongodb+srv://oluwafaith:oluwafaith@cluster0.d6z6r.mongodb.net/companyGraph',{
-  useNewUrlParser:true,
-  useCreateIndex:true,
-  useFindAndModify: false,
-  useUnifiedTopology:true
-})
+mongoose.connect('mongodb+srv://oluwafaith:oluwafaith@cluster0.d6z6r.mongodb.net/companyGraph',
+{ useUnifiedTopology:true, useNewUrlParser:true, useCreateIndex:true, useFindAndModify: false })
 .then(() => {
 console.log("Connected to Database");
 }).catch((err) => {

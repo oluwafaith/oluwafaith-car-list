@@ -2,17 +2,29 @@
   "name": "week-9-task-oluwafaith",
   "version": "0.0.0",
   "private": true,
-
   "scripts": {
     "start": "node ./bin/www",
     "test": "jest"
   },
   "jest": {
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/"
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/src/__test_/*.+(ts|tsx|js)"
     ]
   },
+ 
   "dependencies": {
     "@babel/preset-typescript": "7.10.4",
     "@types/bcrypt": "^3.0.0",
@@ -45,6 +57,7 @@
     "lodash": "^4.17.20",
     "mongoose": "^5.10.3",
     "morgan": "~1.9.1",
+    "ts-jest": "^26.4.0",
     "typescript": "^4.0.3"
   },
   "devDependencies": {

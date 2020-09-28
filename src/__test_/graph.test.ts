@@ -1,7 +1,7 @@
-import app from "../app";
-import supertest from "supertest";
+// import app from "../app";
+// import request from 'supertest';
+const request = require  ('supertest');
 
-const request: any = supertest(app);
 describe("Test all routes", () => {
   it("Test Status code for Correct Query", async () => {
     try {
@@ -24,6 +24,8 @@ describe("Test all routes", () => {
       console.log(`error ${error.toString()}`);
     }
    });
+
+   
    
   // it("Gets all organizations", async (done) => {
   //   request
