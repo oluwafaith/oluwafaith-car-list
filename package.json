@@ -65,5 +65,8 @@
     "jest": "^26.4.2",
     "mongodb-memory-server": "^6.7.5",
     "supertest": "^4.0.2"
+  },
+  "engines": {
+    "node": "12"
   }
 }
