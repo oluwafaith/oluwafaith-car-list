@@ -10,16 +10,7 @@ var http = require('http');
 var mongoose = require('mongoose')
 //var config = require('config')
 
-
-
-// //mongoose
-// mongoose.connect('mongodb://localhost/companyGraph',{
-  //  useNewUrlParser:true,
-  //  useCreateIndex:true,
-  //  useFindAndModify: true,
-  //  useUnifiedTopology:true
-// }).then(()=>console.log('connected to the database'))
-// .catch(err => console.error('could not connect to database', err)) 
+ 
 
 mongoose.connect('mongodb+srv://oluwafaith:oluwafaith@cluster0.d6z6r.mongodb.net/companyGraph',
 { useUnifiedTopology:true, useNewUrlParser:true, useCreateIndex:true, useFindAndModify: false })
@@ -28,6 +19,7 @@ console.log("Connected to Database");
 }).catch((err) => {
     console.log("Not Connected to Database ERROR! ", err);
 });
+
 
 // mongoose.connection.once('open', () => {
 //   console.log("Connected to MongoDB");

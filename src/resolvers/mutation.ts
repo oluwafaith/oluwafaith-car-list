@@ -21,6 +21,8 @@ import { resolveFieldValueOrError } from 'graphql/execution/execute';
 
 const SECRET = "createaverystrongsec34!retthatalsoincludes2423412wdsa324e34e";
 
+
+
     //create, update and delete
 export const Mutation = new GraphQLObjectType({
     name:'Mutation',
@@ -122,7 +124,8 @@ export const Mutation = new GraphQLObjectType({
                 if(!isValid){
                     throw new Error ("user not found")
                 }
-  
+                
+
                 const token = await jwt.sign(
                     {
                         

@@ -1,6 +1,8 @@
-// import app from "../app";
-// import request from 'supertest';
-const request = require  ('supertest');
+
+//import request from 'supertest';
+
+ const request = require  ('supertest');
+
 
 describe("Test all routes", () => {
   it("Test Status code for Correct Query", async () => {
@@ -21,42 +23,145 @@ describe("Test all routes", () => {
         .send({ query: "{companies{cu}}" })
         .expect(500);
     } catch (error) {
-      console.log(`error ${error.toString()}`);
+     // console.log(`error ${error.toString()}`);
+    }
+   });
+
+  it("Test query to get ", async () => {
+    try {
+      const response = await request("http://localhost:3000/graphql")
+      .post("/graphql")
+      query:
+      `
+      query{
+        companies{
+          ceo,
+          address,
+          id
+        }
+      }
+      `
+      //const { data } = response;
+      expect(response).toMatchObject({
+        "data": {
+          "companies": [
+            {
+              "ceo": "green",
+              "address": "lekki",
+              "id": "5f6bb81db40633001450e5c9"
+            },
+            {
+              "ceo": "green",
+              "address": "lekki",
+              "id": "5f6bb847b40633001450e5ca"
+            }
+          ]
+        }
+      })
+     } catch (error) {
+   // console.log(`error ${error.toString()}`);
+    }
+   });
+
+  it("Test mutation to add ", async () => {
+    try {
+      const response = await request("http://localhost:3000/graphql")
+      .post("/graphql")
+      query:
+      `
+      mutation{
+        addCompany(organization:"greatestComp", 
+          products:["green", "yellow"],
+        marketValue:"80%",
+          address:"lekki",
+          ceo:"green",
+          country:"nigeria",
+          employees:["grace", "chile"],
+          noOfEmployees:5
+        ){
+          products
+          marketValue
+          address
+          ceo
+          country
+          employees
+          noOfEmployees
+        }
+      }
+      `
+    //  const { data } = response;
+      expect(response).toMatchObject({
+        "data": {
+          "addCompany": {
+            "products": [
+              "green",
+              "yellow"
+            ],
+            "marketValue": "80%",
+            "address": "lekki",
+            "ceo": "green",
+            "country": null,
+            "employees": [
+              "grace",
+              "chile"
+            ],
+            "noOfEmployees": 5
+          }
+        }
+      })
+     } catch (error) {
+   // console.log(`error ${error.toString()}`);
+    }
+   });
+   
+  it("Test mutation to update", async () => {
+    try {
+      const response = await request("http://localhost:3000/graphql")
+      .post("/graphql")
+      query:
+      `
+      mutation{
+        updateCompany(id:"5f72cea2c99271b027cee813",organization:"greatestComp", 
+          products:["green", "yellow"],
+        marketValue:"800%",
+          address:"lekki-ajah",
+          ceo:"green",
+          country:"america",
+          employees:["grace", "chile"],
+          noOfEmployees:20
+        ){
+          products
+          marketValue
+          address
+          ceo
+          country
+          employees
+          noOfEmployees
+        }
+      }
+      `
+      //const { data } = response;
+      expect(response).toMatchObject({
+        "data": {
+          "updateCompany": {
+            "products": [ "green", "yellow"],
+            "marketValue": "800%",
+            "address": "lekki-ajah",
+            "ceo": "green",
+            "country": "america",
+            "employees": [ "grace", "chile"],
+            "noOfEmployees": 20
+          }
+        }
+      })
+     } catch (error) {
+    //console.log(`error ${error.toString()}`);
     }
    });
 
    
    
-  // it("Gets all organizations", async (done) => {
-  //   request
-  //     .post("/graphql")
-  //     .send({ query: "{companies{ceo}}" })
-  //     .set("Accept", "application.json")
-  //     .expect("Content-Type", /json/)
-  //     .end(function (err:any, res:any) {
-  //         console.log('res.body')
-  //       expect(res.body).toBeInstanceOf(Object);
-  //       done();
-  //     });
-  // });
-
-  // it("Returns organization with id = 5f6bb81db40633001450e5c9", async (done) => {
-  //   request
-  //     .post("/graphql")
-  //     .send({
-  //       query:
-  //         "{ company(id: \"5f6bb81db40633001450e5c9\") { id organization address country } }",
-  //     })
-  //     .set("Accept", "application.json")
-  //     .expect("Content-Type", /json/)
-  //     .end((err:any, res:any) => {
-  //       if (err) return done(err);
-  //       let val = res.body.data.oneOrganization;
-  //       expect(val).toHaveProperty("id", "5f6bb81db40633001450e5c9")
-  //       expect(val).toHaveProperty("organization", "Decagon");
-  //       done();
-  //     });
-  // });
+  
 
   
 });
