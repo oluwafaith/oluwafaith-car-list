@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "build": "bash -e scripts/build.sh",
     "test": "NODE_ENV= jest  --detectOpenHandles --testEnvironment=node --verbose --forceExit  --maxWorkers=1"
   },
   "jest": {
@@ -65,8 +66,5 @@
     "jest": "^26.4.2",
     "mongodb-memory-server": "^6.7.5",
     "supertest": "^4.0.2"
-  },
-  "engines": {
-    "node": "12"
   }
 }
