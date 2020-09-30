@@ -27,7 +27,7 @@ describe("Test all routes", () => {
     }
    });
 
-  it("Test query to get ", async () => {
+  it("Test query to get all company ", async () => {
     try {
       const response = await request("http://localhost:3000/graphql")
       .post("/graphql")
@@ -63,7 +63,38 @@ describe("Test all routes", () => {
     }
    });
 
-  it("Test mutation to add ", async () => {
+  it("Test query to get a company ", async () => {
+    try {
+      const response = await request("http://localhost:3000/graphql")
+      .post("/graphql")
+      query:
+      `
+      query{
+        companies( "id": "5f6bb81db40633001450e5c9"){
+          ceo,
+          address,
+          id
+        }
+      }
+      `
+      //const { data } = response;
+      expect(response).toMatchObject({
+        "data": {
+          "companies": 
+            {
+              "ceo": "green",
+              "address": "lekki",
+              "id": "5f6bb81db40633001450e5c9"
+            }
+          
+        }
+      })
+     } catch (error) {
+   // console.log(`error ${error.toString()}`);
+    }
+   });
+
+  it("Test mutation to add a company", async () => {
     try {
       const response = await request("http://localhost:3000/graphql")
       .post("/graphql")
@@ -114,7 +145,7 @@ describe("Test all routes", () => {
     }
    });
    
-  it("Test mutation to update", async () => {
+  it("Test mutation to update a company", async () => {
     try {
       const response = await request("http://localhost:3000/graphql")
       .post("/graphql")
@@ -159,6 +190,30 @@ describe("Test all routes", () => {
     }
    });
 
+   it("Test mutation to delete", async () => {
+    try {
+      const response = await request("http://localhost:3000/graphql")
+      .post("/graphql")
+      query:
+      `
+      mutation{
+        deleteCompany(id:"5f72cea2c99271b027cee813"){
+          organization
+        }
+      }
+      `
+      //const { data } = response;
+      expect(response).toMatchObject({
+        "data": {
+          "deleteCompany": {
+            "organization":"greatestComp"
+          }
+        }
+      })
+     } catch (error) {
+    //console.log(`error ${error.toString()}`);
+    }
+   });
    
    
   
